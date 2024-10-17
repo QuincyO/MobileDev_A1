@@ -253,63 +253,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab:
   - {fileID: 130283363888306817, guid: e15af1018e1e6d24f9a4521c22bfcebd, type: 3}
-  spawnerBoundary:
-    min: -1.95
-    max: 1.95
+  SpawnerRange:
+    min: 0
+    max: 0
   enemiesToSpawn: 10
-  xBoundary:
-    min: -3
-    max: 3
-  yBoundary:
-    min: -6
-    max: 6
---- !u!1 &597633434
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 597633435}
-  - component: {fileID: 597633436}
-  m_Layer: 0
-  m_Name: Gamemanager
-  m_TagString: GameController
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &597633435
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597633434}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 226.63448, y: 2106.511, z: 15.314779}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &597633436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597633434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e0a3dccc5db199499ca1f7272e7b20d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
-  score: 0
-  highScore: 0
+  Bounds:
+    x:
+      min: 0
+      max: 0
+    y:
+      min: 0
+      max: 0
 --- !u!1 &790385323
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,11 +533,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 675635165573099692, guid: 927a53d4d5b58734bae66743c9d3b00b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 675635165573099692, guid: 927a53d4d5b58734bae66743c9d3b00b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.221
+      value: -3.22
       objectReference: {fileID: 0}
     - target: {fileID: 675635165573099692, guid: 927a53d4d5b58734bae66743c9d3b00b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -630,6 +584,22 @@ PrefabInstance:
       value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 1254579440553118357, guid: 927a53d4d5b58734bae66743c9d3b00b, type: 3}
+      propertyPath: Bounds.x.max
+      value: 1.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 1254579440553118357, guid: 927a53d4d5b58734bae66743c9d3b00b, type: 3}
+      propertyPath: Bounds.x.min
+      value: -1.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 1254579440553118357, guid: 927a53d4d5b58734bae66743c9d3b00b, type: 3}
+      propertyPath: Bounds.y.max
+      value: -3.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1254579440553118357, guid: 927a53d4d5b58734bae66743c9d3b00b, type: 3}
+      propertyPath: Bounds.y.min
+      value: -3.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1254579440553118357, guid: 927a53d4d5b58734bae66743c9d3b00b, type: 3}
       propertyPath: xBoundary.max
       value: 1.95
       objectReference: {fileID: 0}
@@ -639,7 +609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1254579440553118357, guid: 927a53d4d5b58734bae66743c9d3b00b, type: 3}
       propertyPath: isTestingMobile
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -818,6 +788,7 @@ GameObject:
   - component: {fileID: 1948781219}
   - component: {fileID: 1948781218}
   - component: {fileID: 1948781217}
+  - component: {fileID: 1948781220}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -888,7 +859,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1948781220}
         m_TargetAssemblyTypeName: FireButton, Assembly-CSharp
         m_MethodName: ShootWeapon
         m_Mode: 1
@@ -938,6 +909,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948781215}
   m_CullTransparentMesh: 1
+--- !u!114 &1948781220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948781215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5818db28710474e90f949b8ffa70b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerObject: {fileID: 2058268209}
+--- !u!1 &2058268209 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1035505717620540778, guid: 927a53d4d5b58734bae66743c9d3b00b, type: 3}
+  m_PrefabInstance: {fileID: 1113585816}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -947,5 +936,4 @@ SceneRoots:
   - {fileID: 1236408849}
   - {fileID: 112589424}
   - {fileID: 514891904}
-  - {fileID: 597633435}
   - {fileID: 1113585816}

@@ -112,12 +112,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDead: 0
   detectionRadius: 100
-  xBounds:
-    min: 0
-    max: 0
-  yBounds:
-    min: 0
-    max: 0
+  Bounds:
+    x:
+      min: 0
+      max: 0
+    y:
+      min: 0
+      max: 0
   isActive: 0
 --- !u!1 &8403462340558608662
 GameObject:

@@ -3,9 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[System.Serializable]
-public struct Boundary
+namespace Quincy.Structs
 {
-    public float min;
-    public float max;
+    [System.Serializable]
+    public struct Boundary
+    {
+        public Axis x;
+        public Axis y;
+    }
+
+    [System.Serializable]
+    public struct Axis
+    {
+       public float min;
+       public float max;
+    }
 }
+

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Quincy.Structs;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -14,8 +15,7 @@ public class Bullet : MonoBehaviour
 
     private Vector3 _direction;
 
-    public Boundary xBounds;
-    public Boundary yBounds;
+    public Boundary Bounds;
 
     public GameObject instigator = null;
 
@@ -46,8 +46,8 @@ public class Bullet : MonoBehaviour
 
     void CheckBounds()
     {
-        if (transform.position.x < xBounds.min || transform.position.x > xBounds.max ||
-            transform.position.y < yBounds.min || transform.position.y > yBounds.max)
+        if (transform.position.x < Bounds.x.min || transform.position.x > Bounds.x.max ||
+            transform.position.y < Bounds.y.min || transform.position.y > Bounds.y.max)
         {
             instigator.GetComponent<PlayerController>().ReturnToPool(this.gameObject);
             Stop();

@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 5;
     [SerializeField]
-    private Boundary xBoundary;
+    private Boundary Bounds;
     
     private Camera _camera;
     
@@ -30,8 +30,7 @@ public class PlayerController : MonoBehaviour
     private LinkedList<GameObject> _activeBullets;
     private LinkedList<GameObject> _inactiveBullets;
     
-    public Boundary bulletBoundaryX;
-    public Boundary bulletBoundaryY;
+    public Boundary bulletBoundary;
 
     [SerializeField] private float bulletForce = 300;
 
@@ -59,13 +58,14 @@ public class PlayerController : MonoBehaviour
         {
             var bulletGameObject = Instantiate(bulletPrefab);
             var bullet = bulletGameObject.transform.GetComponent<Bullet>();
-            bullet.xBounds = bulletBoundaryX;
-            bullet.yBounds = bulletBoundaryY;
+            bullet.Bounds = bulletBoundary;
             bullet.instigator = this.gameObject;
             
             _inactiveBullets.AddLast(bulletGameObject);
             bulletGameObject.SetActive(false);
         }
+        
+        transform.position = new Vector3(0, Bounds.y.max, 0);
         
     }
 
@@ -85,8 +85,7 @@ public class PlayerController : MonoBehaviour
             var prefab = Instantiate(bulletPrefab);
             var bullet = prefab.GetComponent<Bullet>();
             _activeBullets.AddLast(prefab);
-            bullet.xBounds = bulletBoundaryX;
-            bullet.yBounds = bulletBoundaryY;
+            bullet.Bounds = bulletBoundary;
             bullet.instigator = this.gameObject;
             bullet.Fire(transform,bulletForce);
         }
@@ -110,8 +109,8 @@ public class PlayerController : MonoBehaviour
 
     private void CheckBoundary()
     {
-        if (transform.position.x < xBoundary.min) transform.position = new Vector3(xBoundary.min, transform.position.y, 0);
-        if (transform.position.x > xBoundary.max) transform.position = new Vector3(xBoundary.max, transform.position.y, 0);
+        if (transform.position.x < Bounds.x.min) transform.position = new Vector3(Bounds.x.min, transform.position.y, 0);
+        if (transform.position.x > Bounds.x.max) transform.position = new Vector3(Bounds.x.max, transform.position.y, 0);
     }
 
     private void Move()

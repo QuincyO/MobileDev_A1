@@ -14,12 +14,12 @@ public class EnemySpawner : MonoBehaviour
     private LinkedList<GameObject> _activeEnemies;
     private LinkedList<GameObject> _inActiveEnemies;
     public GameObject[] enemyPrefab;
-   [SerializeField] Boundary spawnerBoundary;
+   [SerializeField] Axis SpawnerRange;
 
     public float enemiesToSpawn = 10;
-    
-    [SerializeField] Boundary xBoundary;
-    [SerializeField] Boundary yBoundary;
+
+
+    [SerializeField] private Boundary Bounds;
 
     private bool canSpawn = false;
 
@@ -69,14 +69,15 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Bounds = GameManager.Instance.enemyBoundary;
+        SpawnerRange = GameManager.Instance.enemyRange;
         if (enemyPrefab.Length > 0)
         {
             for (int i = 0; i < enemiesToSpawn; i++)
             {
                 var prefab = Instantiate(enemyPrefab[Random.Range(0, enemyPrefab.Length - 1)]);
                 var enemyController = prefab.GetComponent<EnemyBehaviour>();
-                enemyController.xBounds = xBoundary;
-                enemyController.yBounds = yBoundary;
+                enemyController.Bounds = this.Bounds;
                 
                 _inActiveEnemies.AddLast(prefab);
                 prefab.SetActive(false);
@@ -97,16 +98,16 @@ public class EnemySpawner : MonoBehaviour
             enemyToDrop.Value.GetComponent<EnemyBehaviour>().isActive = true;
         
         
-            float xValue = Random.Range(spawnerBoundary.min, spawnerBoundary.max);
-            enemyToDrop.Value.transform.position = new Vector3(xValue, yBoundary.max, 0);
+            float xValue = Random.Range(SpawnerRange.min, SpawnerRange.max);
+            enemyToDrop.Value.transform.position = new Vector3(xValue, Bounds.y.max, 0);
         }
         else
         {
             var enemyToDrop = Instantiate(enemyPrefab[Random.Range(0,enemyPrefab.Length - 1)]);
             _activeEnemies.AddLast(gameObject);
             
-            float xValue = Random.Range(xBoundary.min, xBoundary.max);
-            enemyToDrop.transform.position = new Vector3(xValue, yBoundary.max, 0);
+            float xValue = Random.Range(Bounds.x.min, Bounds.x.max);
+            enemyToDrop.transform.position = new Vector3(xValue, Bounds.y.max, 0);
         }
 
     }

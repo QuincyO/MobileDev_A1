@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Quincy.Structs;
 using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
@@ -9,8 +10,7 @@ public class EnemyBehaviour : MonoBehaviour
     public bool isDead = false;
     [SerializeField] private float detectionRadius = 100;
 
-    public Boundary xBounds;
-    public Boundary yBounds;
+    public Boundary Bounds;
     public bool isActive = false;
     
     // Start is called before the first frame update
@@ -32,8 +32,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void CheckBounds()
     {
-        if (transform.position.x < xBounds.min || transform.position.x > xBounds.max ||
-            transform.position.y < yBounds.min || transform.position.y > yBounds.max)
+        if (transform.position.x < Bounds.x.min || transform.position.x > Bounds.x.max ||
+            transform.position.y < Bounds.y.min || transform.position.y > Bounds.y.max)
         {
             Deactivate();
         }

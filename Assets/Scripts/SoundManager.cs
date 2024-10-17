@@ -49,7 +49,6 @@ public class SoundManager : MonoBehaviour
         
         #region Binding Function Calls
         GameManager.OnSceneChange += ChangeScene;
-        
         #endregion
         
         #region Populating Sounds

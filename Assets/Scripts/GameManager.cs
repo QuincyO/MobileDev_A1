@@ -4,13 +4,34 @@ using System.Collections.Generic;
 using static Quincy.Structs.Scenes;
 using Quincy.Structs;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
+
+[RequireComponent(typeof(CloudSpawner),typeof(SoundManager))]
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    private static GameManager _instance;
+
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                GameObject go = new GameObject("GameManager");
+                _instance = go.AddComponent<GameManager>();
+                DontDestroyOnLoad(go);
+            }
+            return _instance;
+        }
+        private set
+        {
+            _instance = value;
+        }
+    }
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -33,12 +54,19 @@ public class GameManager : MonoBehaviour
 
     }
 
-    [Header("UI Elements")]
-    public TextMeshProUGUI scoreText;
+    [Header("Bounds")]
+    [SerializeField] Boundary playerBoundary;
+    [SerializeField] Boundary playerBulletBoundary; 
+    [SerializeField] public  Boundary enemyBoundary;
+    [SerializeField] public Axis enemyRange;
+    
     
     [Header("Trophies")]
     Dictionary<string,int> trackables;
     
+    private TextMeshProUGUI scoreText;
+    
+    //     Delegates    //
     public static event Action<Scenes> OnSceneChange;
     public static Scenes currentScene;
 

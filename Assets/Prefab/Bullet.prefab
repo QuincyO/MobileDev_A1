@@ -111,12 +111,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveForce: 100
   isActive: 0
-  xBounds:
-    min: -2.85
-    max: 2.85
-  yBounds:
-    min: -5.6
-    max: 5.6
+  Bounds:
+    x:
+      min: 0
+      max: 0
+    y:
+      min: 0
+      max: 0
   instigator: {fileID: 0}
   Explosion: {fileID: 2808137037113617461, guid: dca338bfeeb4cb8419ad4331dba31672, type: 3}
 --- !u!1 &7300912923517531634
