@@ -17,20 +17,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance
     {
-        get
-        {
-            if (_instance == null)
-            {
-                GameObject go = new GameObject("GameManager");
-                _instance = go.AddComponent<GameManager>();
-                DontDestroyOnLoad(go);
-            }
-            return _instance;
-        }
-        private set
-        {
-            _instance = value;
-        }
+        get;
+        private set;
     }
     private void Awake()
     {
@@ -55,8 +43,8 @@ public class GameManager : MonoBehaviour
     }
 
     [Header("Bounds")]
-    [SerializeField] Boundary playerBoundary;
-    [SerializeField] Boundary playerBulletBoundary; 
+    [SerializeField] public Boundary playerBoundary;
+    [SerializeField] public Boundary playerBulletBoundary; 
     [SerializeField] public  Boundary enemyBoundary;
     [SerializeField] public Axis enemyRange;
     

@@ -19,10 +19,11 @@ public class CloudSpawner : MonoBehaviour
     [SerializeField] float MediumCloudSpeed = 1f;
     [SerializeField] float FastCloudSpeed = 1.5f;
     [Space]
+    [Space]
 
     [SerializeField] int MAX_ACTIVE_CLOUDS = 5;
     [SerializeField] private int _totalActiveClouds;
-    private const int MAX_CLOUDS = 50;
+    [SerializeField] private int MAX_CLOUDS = 30;
     
     public Boundary cloudBoundaries;
 

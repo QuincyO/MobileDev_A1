@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Quincy.Interfaces;
 using Quincy.Structs;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour ,IDamageable
 {
     [SerializeField]
     private float moveSpeed = 5;
@@ -33,6 +34,9 @@ public class PlayerController : MonoBehaviour
     public Boundary bulletBoundary;
 
     [SerializeField] private float bulletForce = 300;
+    private IDamageable _damageableImplementation;
+
+
 
     private void Awake()
     {
@@ -40,6 +44,9 @@ public class PlayerController : MonoBehaviour
 
         _activeBullets = new LinkedList<GameObject>();
         _inactiveBullets = new LinkedList<GameObject>();
+        bulletBoundary = GameManager.Instance.enemyBoundary;
+        Bounds = GameManager.Instance.playerBoundary;
+        Health = MaxHealth;
 
     }
 
@@ -66,6 +73,7 @@ public class PlayerController : MonoBehaviour
         }
         
         transform.position = new Vector3(0, Bounds.y.max, 0);
+        Health = MaxHealth;
         
     }
 
@@ -151,7 +159,54 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            GameManager.Instance.ChangeScene(Scenes.MainMenu);
+            TakeDamage(30, other.gameObject);
         }
+    }
+
+    public float Health
+    {
+        get { return _health; }
+        set
+        {
+            _health = Mathf.Clamp(value,0,_maxHealth);
+            if (_health == 0)
+            {
+                OnDeath();
+            }
+        }
+    }
+
+    public event Action<GameObject> DeathEvent;
+    public event Action<GameObject> HitEvent;
+    private void OnHit(GameObject attacker)
+    {
+        HitEvent?.Invoke(attacker);
+    }
+    
+    public void TakeDamage(float damage,GameObject attacker)
+    {
+        Health -= damage;
+        OnHit(attacker);
+    }
+
+    private void OnDeath()
+    {
+        GameManager.Instance.ChangeScene(Scenes.Lose);
+        DeathEvent?.Invoke(gameObject);
+    }
+
+    private float _health;
+
+    public float MaxHealth
+    {
+        get { return _maxHealth; }
+        set { _maxHealth = value; }
+    }
+    [SerializeField] float _maxHealth;
+
+
+    public void Heal(float heal)
+    {
+        Health += heal;
     }
 }
