@@ -173,9 +173,11 @@ public class PlayerController : MonoBehaviour ,IDamageable
             {
                 OnDeath();
             }
+            HealthChanged?.Invoke(this);
         }
     }
 
+    public event Action<PlayerController> HealthChanged;
     public event Action<GameObject> DeathEvent;
     public event Action<GameObject> HitEvent;
     private void OnHit(GameObject attacker)

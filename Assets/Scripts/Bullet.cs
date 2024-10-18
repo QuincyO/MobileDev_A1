@@ -62,8 +62,9 @@ public class Bullet : MonoBehaviour
             
             if (instigator.IsUnityNull()) return;
 
-            GameManager.Instance.UpdateScore();
             instigator.GetComponent<PlayerController>().ReturnToPool(this.gameObject);
+            instigator.GetComponent<PlayerController>().Heal(5);
+            GameManager.Instance.UpdateScore();
             Stop();
         }
     }
