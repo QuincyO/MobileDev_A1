@@ -10,7 +10,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 
-[RequireComponent(typeof(CloudSpawner),typeof(SoundManager))]
+[RequireComponent(typeof(CloudSpawner),(typeof(SoundManager)))]
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     
     
     [Header("Trophies")]
-    Dictionary<string,int> trackables;
+    public Dictionary<string,int> trackables;
     
     private TextMeshProUGUI scoreText;
     
@@ -86,35 +86,32 @@ public class GameManager : MonoBehaviour
     private void SceneChange(Scenes nextScene)
     {
         scoreText = null;
-        trackables["Score"] = 0;
-        trackables["Enemies"] = 0;
-        trackables["Coins"] = 0;
+        var highScore = trackables["Score"];
+        var enemiesKilled = trackables["Enemies"];
+        var coinsCollected = trackables["Coins"];
         
         switch (nextScene)
         {
             case Lose:
-
                 trackables["HighScore"] = trackables["Score"];
-
-            
                 var lossWidgetElements = FindObjectsOfType<TextMeshProUGUI>();
                 foreach (var element in lossWidgetElements)
                 {
                     if (element.name == "Coins")
                     {
-                        element.text = $"Coins Collected: {trackables["Coins"]}";
+                        element.text = $"Coins Collected: {coinsCollected}";
                         continue;
                     }
 
                     if (element.name == "HighScore")
                     {
-                        element.text = $"High Score: {trackables["HighScore"]}";
+                        element.text = $"High Score: {highScore}";
                         continue;
                     }
 
                     if (element.name == "Enemies")
                     {
-                        element.text = $"Enemies Killed: {trackables["Enemies"]}";
+                        element.text = $"Enemies Killed: {enemiesKilled}";
                     }
                 }
                 
@@ -132,6 +129,11 @@ public class GameManager : MonoBehaviour
                 break;
             
         }
+
+        trackables["HighScore"] = 0;
+        trackables["Score"] = 0;
+        trackables["Coins"] = 0;
+        trackables["Enemies"] = 0;
 
     }
 

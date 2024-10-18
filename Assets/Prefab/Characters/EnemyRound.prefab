@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8316960540774736666}
   - component: {fileID: 8188780950582284737}
-  - component: {fileID: 7078467515530746396}
   - component: {fileID: 486277153487724276}
+  - component: {fileID: 8581802243442364550}
   m_Layer: 0
   m_Name: EnemyRound
   m_TagString: Enemy
@@ -70,8 +70,32 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.83
---- !u!50 &7078467515530746396
+  m_Radius: 0.82
+--- !u!114 &486277153487724276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130283363888306817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889948c269979fc43b80e587c28dd5a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDead: 0
+  detectionRadius: 15
+  Bounds:
+    x:
+      min: 0
+      max: 0
+    y:
+      min: 0
+      max: 0
+  isActive: 0
+  nudgeFactor: 75
+  dampingFactor: 1
+--- !u!50 &8581802243442364550
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -98,28 +122,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &486277153487724276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 130283363888306817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 889948c269979fc43b80e587c28dd5a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDead: 0
-  detectionRadius: 100
-  Bounds:
-    x:
-      min: 0
-      max: 0
-    y:
-      min: 0
-      max: 0
-  isActive: 0
 --- !u!1 &8403462340558608662
 GameObject:
   m_ObjectHideFlags: 0

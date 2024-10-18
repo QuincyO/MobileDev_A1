@@ -10,6 +10,8 @@ using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour ,IDamageable
 {
+
+    [SerializeField] private bool isInvulnerable = false;
     [SerializeField]
     private float moveSpeed = 5;
     [SerializeField]
@@ -187,6 +189,7 @@ public class PlayerController : MonoBehaviour ,IDamageable
     
     public void TakeDamage(float damage,GameObject attacker)
     {
+        if (isInvulnerable) return;
         Health -= damage;
         OnHit(attacker);
     }

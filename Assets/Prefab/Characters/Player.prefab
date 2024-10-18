@@ -82,20 +82,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266de97bb3e5ad24fa596cbedb9a00e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInvulnerable: 1
   moveSpeed: 5
-  xBoundary:
-    min: -1.84
-    max: 1.84
+  Bounds:
+    x:
+      min: 0
+      max: 0
+    y:
+      min: 0
+      max: 0
   isTestingMobile: 0
   isMobile: 1
   bulletPrefab: {fileID: 7209672795770889384, guid: a84038d9c5d6de84188c3b8928a0087c, type: 3}
-  bulletBoundaryX:
-    min: -3
-    max: 3
-  bulletBoundaryY:
-    min: -5.56
-    max: 6
+  bulletBoundary:
+    x:
+      min: 0
+      max: 0
+    y:
+      min: 0
+      max: 0
   bulletForce: 300
+  _maxHealth: 0
 --- !u!1 &1607521345735818361
 GameObject:
   m_ObjectHideFlags: 0

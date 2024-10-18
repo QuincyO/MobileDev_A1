@@ -457,8 +457,8 @@ GameObject:
   m_Component:
   - component: {fileID: 649176376}
   - component: {fileID: 649176377}
-  - component: {fileID: 649176379}
   - component: {fileID: 649176378}
+  - component: {fileID: 649176379}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Manager
@@ -544,14 +544,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlowCloudSpeed: 0.25
-  MediumCloudSpeed: 0.85
-  FastCloudSpeed: 1.2
-  MAX_ACTIVE_CLOUDS: 25
+  MediumCloudSpeed: 1
+  FastCloudSpeed: 1.5
+  MAX_ACTIVE_CLOUDS: 5
   _totalActiveClouds: 0
+  MAX_CLOUDS: 30
   cloudBoundaries:
     x:
-      min: -4
-      max: 4
+      min: -5
+      max: 5
     y:
       min: 0
       max: 4.5
