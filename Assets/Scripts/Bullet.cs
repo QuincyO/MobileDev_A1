@@ -10,7 +10,6 @@ public class Bullet : MonoBehaviour
 {
     public float moveForce = 100;
 
-    private bool _isFired = false;
     public bool isActive = false;
 
     private Vector3 _direction;
@@ -35,7 +34,6 @@ public class Bullet : MonoBehaviour
 
     private void Stop()
     {
-        _isFired = false;
         isActive = false;
     }
 
@@ -47,7 +45,7 @@ public class Bullet : MonoBehaviour
     void CheckBounds()
     {
         if (transform.position.x < Bounds.x.min || transform.position.x > Bounds.x.max ||
-            transform.position.y < Bounds.y.min || transform.position.y > Bounds.y.max)
+            transform.position.y < Bounds.y.min)
         {
             instigator.GetComponent<PlayerController>().ReturnToPool(this.gameObject);
             Stop();
@@ -72,10 +70,9 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isActive)
-        {
+
             CheckBounds();
-        }
+        
 
     }
 }

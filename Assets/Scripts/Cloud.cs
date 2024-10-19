@@ -45,10 +45,8 @@ public class Cloud : MonoBehaviour
 
     bool CheckOutOfBounds()
     {
-        if (transform.position.x < Bounds.x.min || transform.position.x > Bounds.x.max ||
-            transform.position.y < Bounds.y.min || transform.position.y > Bounds.y.max)
+        if (transform.position.x < Bounds.x.min || transform.position.x > Bounds.x.max)
         {
-
             Reset();
             return true;
         }
@@ -65,9 +63,9 @@ public class Cloud : MonoBehaviour
     {
         MoveLeft = Random.Range(0, 2) == 1;
         #region Set Left or Right Direction
-        direction = MoveLeft?  Vector3.left:Vector3.right;
+        //direction = MoveLeft?  Vector3.left:Vector3.right;
         transform.rotation = MoveLeft? Quaternion.Euler(0,180,0) : Quaternion.Euler(0,0,0);
-        var xPos = MoveLeft ? Bounds.x.min : Bounds.x.max;
+        var xPos = MoveLeft ? Bounds.x.min +.1f : Bounds.x.max-.1f;
         #endregion
 
         float scaleFactor;

@@ -18,10 +18,12 @@ public class EnemySpawner : MonoBehaviour
 
     public float enemiesToSpawn = 10;
 
+    [SerializeField] private float spawnRate = .5f;
+
 
     [SerializeField] private Boundary Bounds;
 
-    private bool canSpawn = false;
+    [SerializeField] private bool canSpawn = false;
 
     private void Awake()
     {
@@ -73,18 +75,20 @@ public class EnemySpawner : MonoBehaviour
         SpawnerRange = GameManager.Instance.enemyRange;
         if (enemyPrefab.Length > 0)
         {
+            EnemyBehaviour.player = FindObjectOfType<PlayerController>();
             for (int i = 0; i < enemiesToSpawn; i++)
             {
                 var prefab = Instantiate(enemyPrefab[Random.Range(0, enemyPrefab.Length - 1)]);
                 var enemyController = prefab.GetComponent<EnemyBehaviour>();
                 enemyController.Bounds = this.Bounds;
                 
+                
                 _inActiveEnemies.AddLast(prefab);
                 prefab.SetActive(false);
             }
         }
         
-        InvokeRepeating(nameof(DropEnemy), 1f,Random.Range(0.8f, 1.2f));
+        Invoke(nameof(DropEnemy),.8f);
     }
 
     void DropEnemy()
@@ -95,7 +99,6 @@ public class EnemySpawner : MonoBehaviour
             _inActiveEnemies.Remove(enemyToDrop);
         
             enemyToDrop.Value.SetActive(true);
-            enemyToDrop.Value.GetComponent<EnemyBehaviour>().isActive = true;
         
         
             float xValue = Random.Range(SpawnerRange.min, SpawnerRange.max);
@@ -119,9 +122,15 @@ public class EnemySpawner : MonoBehaviour
         _inActiveEnemies.AddLast(enemy);
     }
 
+    private float timeSinceLastSpawn = 0f;
     // Update is called once per frame
     void Update()
     {
-        
+        timeSinceLastSpawn += Time.deltaTime;
+        if (timeSinceLastSpawn >= spawnRate)
+        {
+            if (canSpawn) DropEnemy();
+            timeSinceLastSpawn -= spawnRate;
+        }
     }
 }

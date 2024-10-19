@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour ,IDamageable
 
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         _camera = Camera.main;
@@ -159,10 +158,10 @@ public class PlayerController : MonoBehaviour ,IDamageable
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            TakeDamage(30, other.gameObject);
-        }
+      // if (other.gameObject.CompareTag("Enemy"))
+      // {
+      //     TakeDamage(30, other.gameObject);
+      // }
     }
 
     public float Health

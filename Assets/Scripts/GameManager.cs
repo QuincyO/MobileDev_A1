@@ -10,7 +10,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 
-[RequireComponent(typeof(CloudSpawner),(typeof(SoundManager)))]
+[RequireComponent(typeof(SoundManager))]
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
@@ -74,7 +74,12 @@ public class GameManager : MonoBehaviour
         {
             trackables["HighScore"] = trackables["Score"];
         }
-        scoreText.text = "Score: " + trackables["Score"];
+        UpdateScoreUI();
+    }
+
+    public static void UpdateScoreUI()
+    {
+        Instance.scoreText.text = "Score: " + Instance.trackables["Score"];
     }
 
     public void ChangeScene(Scenes nextScene)

@@ -475,7 +475,7 @@ Transform:
   m_GameObject: {fileID: 649176375}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.08, y: 4.5, z: 0}
+  m_LocalPosition: {x: -4, y: 4.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -509,14 +509,14 @@ MonoBehaviour:
       max: 5.5
   enemyBoundary:
     x:
-      min: -2.6
-      max: 2.6
+      min: -7
+      max: 7
     y:
       min: -5.5
       max: 6
   enemyRange:
-    min: -2.2
-    max: 2.2
+    min: -7
+    max: 7
 --- !u!114 &649176378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,13 +546,13 @@ MonoBehaviour:
   SlowCloudSpeed: 0.25
   MediumCloudSpeed: 1
   FastCloudSpeed: 1.5
-  MAX_ACTIVE_CLOUDS: 5
+  MAX_ACTIVE_CLOUDS: 25
   _totalActiveClouds: 0
   MAX_CLOUDS: 30
   cloudBoundaries:
     x:
-      min: -5
-      max: 5
+      min: -3
+      max: 3
     y:
       min: 0
       max: 4.5

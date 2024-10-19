@@ -64,7 +64,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -96,13 +96,13 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7209672795770889384, guid: a84038d9c5d6de84188c3b8928a0087c, type: 3}
   bulletBoundary:
     x:
-      min: 0
-      max: 0
+      min: -2.5
+      max: 2.5
     y:
-      min: 0
-      max: 0
-  bulletForce: 300
-  _maxHealth: 0
+      min: -5
+      max: 10
+  bulletForce: 1000
+  _maxHealth: 100
 --- !u!1 &1607521345735818361
 GameObject:
   m_ObjectHideFlags: 0

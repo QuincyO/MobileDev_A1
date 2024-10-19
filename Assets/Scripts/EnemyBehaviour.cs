@@ -11,10 +11,12 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private float detectionRadius = 6;
 
     public Boundary Bounds;
-    public bool isActive = false;
+    public bool isActiveSeeking = true;
 
     public float nudgeFactor = 50;
     CircleCollider2D detectionCollider  = null;
+
+    public static PlayerController player;
     
     // Start is called before the first frame update
     void Start()
@@ -26,33 +28,30 @@ public class EnemyBehaviour : MonoBehaviour
     }
 private Rigidbody2D rb = null;
 
-private void FixedUpdate()
-{
 
-}
 
 // Update is called once per frame
     void Update()
     {
-        if (isActive)
-        {
+
             CheckBounds();
-        }
+        
     }
 
     private void CheckBounds()
     {
-        if (transform.position.x < Bounds.x.min || transform.position.x > Bounds.x.max ||
-            transform.position.y < Bounds.y.min )
+        if (transform.position.y <= -.5f) isActiveSeeking = false;
+        
+            if (transform.position.y < player.transform.position.y)
         {
-            Kill();
+            Reset();
         }
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
-        
+        if (!isActiveSeeking) return;
         
         Vector3 dampingForce = -rb.velocity * dampingFactor;
         
@@ -76,12 +75,23 @@ private void FixedUpdate()
         {
             Kill();
         }
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            player.TakeDamage(45f,gameObject);
+            Reset();
+        }
     }
 
     private void Kill()
     {
         GameManager.Instance.trackables["Enemies"]++;
+        Reset();
+    }
+
+    private void Reset()
+    {
         EnemySpawner.Instance.ReturnToPool(this.gameObject);
-        isActive = false;
+        isActiveSeeking = true;
     }
 }
