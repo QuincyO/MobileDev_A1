@@ -141,13 +141,5 @@ public class GameManager : MonoBehaviour
         trackables["Enemies"] = 0;
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-
+    
 }

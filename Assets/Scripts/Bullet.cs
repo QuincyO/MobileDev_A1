@@ -57,6 +57,7 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             Instantiate(Explosion,other.contacts[0].point,Quaternion.identity);
+            SoundManager.Play("EnemyHit");
             
             if (instigator.IsUnityNull()) return;
 

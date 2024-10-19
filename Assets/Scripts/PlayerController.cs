@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Quincy.Interfaces;
 using Quincy.Structs;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
+
 
 public class PlayerController : MonoBehaviour ,IDamageable
 {
@@ -22,15 +20,14 @@ public class PlayerController : MonoBehaviour ,IDamageable
     [SerializeField]
     private bool isTestingMobile = false;
 
-    [SerializeField] private bool isMobile = true;
-    
+    [SerializeField] private bool isMobile = false;
     private Vector3 destination;
     
     private Rigidbody2D rb2d;
     
     [SerializeField] GameObject bulletPrefab;
 
-    private LinkedList<GameObject> _activeBullets;
+    public LinkedList<GameObject> _activeBullets;
     private LinkedList<GameObject> _inactiveBullets;
     
     public Boundary bulletBoundary;
@@ -99,8 +96,9 @@ public class PlayerController : MonoBehaviour ,IDamageable
             bullet.Fire(transform,bulletForce);
         }
     }
-
-    // Update is called once per frame
+    
+    
+    
     void Update()
     {
         if (isMobile) GetTouchInput();
@@ -156,14 +154,7 @@ public class PlayerController : MonoBehaviour ,IDamageable
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-      // if (other.gameObject.CompareTag("Enemy"))
-      // {
-      //     TakeDamage(30, other.gameObject);
-      // }
-    }
-
+    
     public float Health
     {
         get { return _health; }
@@ -177,12 +168,15 @@ public class PlayerController : MonoBehaviour ,IDamageable
             HealthChanged?.Invoke(this);
         }
     }
+    
+    
 
     public event Action<PlayerController> HealthChanged;
     public event Action<GameObject> DeathEvent;
     public event Action<GameObject> HitEvent;
     private void OnHit(GameObject attacker)
     {
+        SoundManager.Play("PlayerHit");
         HitEvent?.Invoke(attacker);
     }
     
@@ -195,6 +189,8 @@ public class PlayerController : MonoBehaviour ,IDamageable
 
     private void OnDeath()
     {
+        
+        SoundManager.Play("PlayerDeath");
         GameManager.Instance.ChangeScene(Scenes.Lose);
         DeathEvent?.Invoke(gameObject);
     }
@@ -207,8 +203,8 @@ public class PlayerController : MonoBehaviour ,IDamageable
         set { _maxHealth = value; }
     }
     [SerializeField] float _maxHealth;
-
-
+    
+    
     public void Heal(float heal)
     {
         Health += heal;

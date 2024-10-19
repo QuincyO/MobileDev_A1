@@ -21,7 +21,7 @@ public class SoundManager : MonoBehaviour
         set
         {
             _volume = value/100f;
-            sounds["MainMenuMusic"].volume = Mathf.Clamp(_volume, 0f, 1f);
+            foreach (var source in sounds) source.Value.volume = Mathf.Clamp(_volume, 0f, 1f);
         }
     }
 
@@ -31,6 +31,9 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
+        
+        EventManager manager = new EventManager();
+        
         #region Instance Creation
         if (Instance != null && Instance != this)
         {
@@ -65,19 +68,16 @@ public class SoundManager : MonoBehaviour
     }
     
 
-    public void Play(string keyname)
+    public static void Play(string keyname)
     {
-        if (!sounds.TryGetValue(keyname, out var sound)) return;
-        sound.volume = volume;
+        if (!Instance.sounds.TryGetValue(keyname, out var sound)) return;
+        sound.volume = Instance.volume;
         sound.Play();
+
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-    
 
     #region SceneChange
     
@@ -92,9 +92,17 @@ public class SoundManager : MonoBehaviour
         {
             
             case Scenes.MainMenu:
-                if (sounds["MainMenuMusic"].isPlaying) break;
-                sounds["MainMenuMusic"].Play();
-                sounds["MainMenuMusic"].loop = true;
+                if (!sounds["MainMenuMusic"].isPlaying)
+                {
+                    sounds["MainMenuMusic"].Play();
+                    sounds["MainMenuMusic"].loop = true;
+                }
+                if (!sounds["Wind"].isPlaying)
+                {
+                    sounds["Wind"].Play();
+                    sounds["Wind"].loop = true;
+                }
+
                 break;
             case Scenes.Instructions:
                 break;

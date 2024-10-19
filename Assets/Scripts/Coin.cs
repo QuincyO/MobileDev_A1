@@ -38,7 +38,7 @@ public class Coin : MonoBehaviour
             GameManager.Instance.trackables["Coins"]++;
             GameManager.Instance.trackables["Score"] += 10;
             GameManager.UpdateScoreUI();
-            SoundManager.Instance.Play("Coin");
+            SoundManager.Play("Coin");
             Reset();
         }
     }

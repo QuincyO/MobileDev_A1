@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266de97bb3e5ad24fa596cbedb9a00e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInvulnerable: 1
+  isInvulnerable: 0
   moveSpeed: 5
   Bounds:
     x:
@@ -92,7 +92,7 @@ MonoBehaviour:
       min: 0
       max: 0
   isTestingMobile: 0
-  isMobile: 1
+  isMobile: 0
   bulletPrefab: {fileID: 7209672795770889384, guid: a84038d9c5d6de84188c3b8928a0087c, type: 3}
   bulletBoundary:
     x:
@@ -102,7 +102,7 @@ MonoBehaviour:
       min: -5
       max: 10
   bulletForce: 1000
-  _maxHealth: 100
+  _maxHealth: 1000
 --- !u!1 &1607521345735818361
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +176,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a3a13dee800bddc40839d97c630e5e81, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eb699ba83aaf5fd4a8e470b31bfa42e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
